@@ -8,11 +8,7 @@ class VideoViewState {
     ///Initialize variables
   }
 
-  late int index=0;
-
   late bool isLoading = true;
 
   late List<Post> postList;
-
-  late ScrollController scrollController;
 }

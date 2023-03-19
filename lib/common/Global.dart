@@ -43,6 +43,7 @@ class Global {
     if (_profile != null) {
       try {
         profile = MySetting.fromJson(jsonDecode(_profile)).obs;
+        print("object");
       } catch (e) {
         print(e);
       }

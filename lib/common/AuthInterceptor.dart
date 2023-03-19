@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as Get;
 import 'package:take_it_home/common/Git.dart';
 import 'package:take_it_home/common/Global.dart';
 
@@ -18,11 +19,17 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onResponse(Response response, ResponseInterceptorHandler handler) async {
+
     BaseBean<String> baseBean = BaseBean<String>.fromJson(response.data);
-    if(baseBean.token==401){
-      Response? res = await Git.retry(response.requestOptions);
-      if(res!=null){
-        handler.next(res);
+    if(baseBean.code==401){
+      print(response.headers.value("Authorization"));
+      if(response.headers.value("Authorization")==null){
+        Get.Get.toNamed("/login");
+      }else{
+        Response? res = await Git.retry(response.requestOptions);
+        if(res!=null){
+          handler.next(res);
+        }
       }
     }
     else{

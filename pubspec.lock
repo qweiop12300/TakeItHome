@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "98d1d33ed129b372846e862de23a0fc365745f4d7b5e786ce667fcbbb7ac5c07"
+      sha256: "503361166f4a100e0d7eb7fb5a62c6f0322512f2bcb48d6922caf98f24b0ab90"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "55.0.0"
+    version: "56.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "881348aed9b0b425882c97732629a6a31093c8ff20fc4b3b03fb9d3d50a3a126"
+      sha256: "93fcd81a6716e69864516750590cf1e699420615046bda19100238aa7b429785"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.7.1"
+    version: "5.8.0"
   args:
     dependency: transitive
     description:
@@ -33,6 +33,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.10.0"
+  audio_video_progress_bar:
+    dependency: transitive
+    description:
+      name: audio_video_progress_bar
+      sha256: "7be62917604e19e3873e12c8025bbc6dbee5876e1fa4cd7772ea1d0eb0e88d99"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.11.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -185,14 +193,30 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.0"
+  dart_vlc:
+    dependency: "direct main"
+    description:
+      name: dart_vlc
+      sha256: f93499b938fbb6ce9eb3fb0368878cd18eac4e18ed45956731a0d6e758d75a34
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.0"
+  dart_vlc_ffi:
+    dependency: transitive
+    description:
+      name: dart_vlc_ffi
+      sha256: "670d4b27296935e4e4b8d903d6833c222fc94133bbd3e9fa36d8a2e7751a63d0"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.0+1"
   dio:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "2644a9e0965a7aa3deb09cb8ce4081db4450c178f472818c8cd34216a3070d7b"
+      sha256: "3e5c4a94d112540d0c9a6b7f3969832e1604eb8cde0f88d0808382f9f632100b"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.2"
+    version: "5.0.3"
   fake_async:
     dependency: transitive
     description:

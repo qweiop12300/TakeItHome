@@ -50,9 +50,17 @@ class Git {
     return baseBean;
   }
 
+  static Future<BaseBean> add(String url,Map<String,dynamic> data) async{
+    Response response;
+    BaseBean baseBean;
+
+    response = await Git.getDio().post(url,data: data);
+    baseBean = BaseBean.fromJson(response.data);
+    return baseBean;
+  }
+
   static Future<BaseBean<String>> login(String url,var data) async{
     Response response;
-    print(data);
     response = await Git.getDio().post(url,data: data);
     BaseBean<String> baseBean = BaseBean<String>.fromJson(response.data);
     return baseBean;
@@ -69,5 +77,7 @@ class Git {
     }
     return null;
   }
+
+
 
 }

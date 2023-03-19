@@ -2,6 +2,7 @@ import 'package:take_it_home/generated/json/base/json_convert_content.dart';
 import 'package:take_it_home/models/head.dart';
 import 'package:take_it_home/models/post.dart';
 
+
 Head $HeadFromJson(Map<String, dynamic> json) {
 	final Head head = Head();
 	final int? id = jsonConvert.convert<int>(json['id']);
@@ -23,6 +24,6 @@ Map<String, dynamic> $HeadToJson(Head entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
 	data['id'] = entity.id;
 	data['pid'] = entity.pid;
-	data['post'] = entity.post;
+	data['post'] = entity.post?.toJson();
 	return data;
 }

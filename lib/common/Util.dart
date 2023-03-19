@@ -9,6 +9,5 @@ class  Util{
       return url;
     }
     return "https://via.placeholder.com/800x1000";
-
   }
 }

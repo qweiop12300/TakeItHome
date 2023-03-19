@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:dart_vlc/dart_vlc.dart';
 import'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:take_it_home/routes/home/view.dart';
@@ -11,6 +12,9 @@ import 'common/Global.dart';
 void main() {
   // HttpOverrides.global = new MyHttpOverrides();
   Global.init().then((value) => {
+    if(Platform.isWindows||Platform.isLinux){
+      DartVLC.initialize()
+    },
     runApp(MainPage())
   });
 

@@ -1,6 +1,13 @@
 import 'package:take_it_home/generated/json/base/json_field.dart';
 import 'package:take_it_home/generated/json/post.g.dart';
+import 'package:take_it_home/models/animal.dart';
+import 'package:take_it_home/models/topic.dart';
+import 'package:take_it_home/models/like.dart';
 import 'dart:convert';
+
+import 'package:take_it_home/models/user_e.dart';
+
+import 'concern.dart';
 
 @JsonSerializable()
 class Post {
@@ -13,8 +20,11 @@ class Post {
 	dynamic createDate;
 	dynamic updateDate;
 	int? uid;
+	UserE? user;
 	dynamic tid;
+	Topic? appTopic;
 	dynamic aid;
+	Animal? appAnimal;
 	dynamic location;
 	dynamic city;
 	dynamic urgent;
@@ -24,6 +34,10 @@ class Post {
 	int? commentsNumber;
 	dynamic url;
 	dynamic s1;
+	Like? isLike;
+	Like? isCollection;
+	Concern? isConcern;
+
   
   Post();
 
@@ -31,9 +45,15 @@ class Post {
 
   Map<String, dynamic> toJson() => $PostToJson(this);
 
-  Post copyWith({int? id, String? title, String? content, dynamic image, dynamic video, dynamic createDate, dynamic updateDate, int? uid, dynamic tid, dynamic aid, dynamic location, dynamic city, dynamic urgent, dynamic typeId, int? likeNumber, int? collectionNumber, int? commentsNumber, dynamic url, dynamic s1}) {
+  Post copyWith({Concern? isConcern,Like? isCollection,Like? isLike,Animal? appAnimal,Topic? appTopic,UserE? user,int? id, String? title, String? content, dynamic image, dynamic video, dynamic createDate, dynamic updateDate, int? uid, dynamic tid, dynamic aid, dynamic location, dynamic city, dynamic urgent, dynamic typeId, int? likeNumber, int? collectionNumber, int? commentsNumber, dynamic url, dynamic s1,}) {
       return Post()..id= id ?? this.id
-			..title= title ?? this.title
+				..isConcern= isConcern ?? this.isConcern
+				..isCollection= isCollection ?? this.isCollection
+				..isLike= isLike ?? this.isLike
+				..appAnimal= appAnimal ?? this.appAnimal
+				..appTopic= appTopic ?? this.appTopic
+				..user= user ?? this.user
+				..title= title ?? this.title
 			..content= content ?? this.content
 			..image= image ?? this.image
 			..video= video ?? this.video

@@ -2,6 +2,7 @@
 import 'package:flutter/widgets.dart';
 
 class MyNotification extends Notification {
-  final int type;
-  MyNotification(this.type);
+  final int? type;
+  final int? index;
+  MyNotification([this.type,this.index]);
 }

@@ -1,5 +1,15 @@
 import 'package:take_it_home/generated/json/base/json_convert_content.dart';
 import 'package:take_it_home/models/post.dart';
+import 'package:take_it_home/models/animal.dart';
+
+import 'package:take_it_home/models/topic.dart';
+
+import 'package:take_it_home/models/like.dart';
+
+import 'package:take_it_home/models/user_e.dart';
+
+import '../../models/concern.dart';
+
 
 Post $PostFromJson(Map<String, dynamic> json) {
 	final Post post = Post();
@@ -35,13 +45,25 @@ Post $PostFromJson(Map<String, dynamic> json) {
 	if (uid != null) {
 		post.uid = uid;
 	}
+	final UserE? user = jsonConvert.convert<UserE>(json['user']);
+	if (user != null) {
+		post.user = user;
+	}
 	final dynamic tid = jsonConvert.convert<dynamic>(json['tid']);
 	if (tid != null) {
 		post.tid = tid;
 	}
+	final Topic? appTopic = jsonConvert.convert<Topic>(json['appTopic']);
+	if (appTopic != null) {
+		post.appTopic = appTopic;
+	}
 	final dynamic aid = jsonConvert.convert<dynamic>(json['aid']);
 	if (aid != null) {
 		post.aid = aid;
+	}
+	final Animal? appAnimal = jsonConvert.convert<Animal>(json['appAnimal']);
+	if (appAnimal != null) {
+		post.appAnimal = appAnimal;
 	}
 	final dynamic location = jsonConvert.convert<dynamic>(json['location']);
 	if (location != null) {
@@ -79,6 +101,18 @@ Post $PostFromJson(Map<String, dynamic> json) {
 	if (s1 != null) {
 		post.s1 = s1;
 	}
+	final Like? isLike = jsonConvert.convert<Like>(json['isLike']);
+	if (isLike != null) {
+		post.isLike = isLike;
+	}
+	final Like? isCollection = jsonConvert.convert<Like>(json['isCollection']);
+	if (isCollection != null) {
+		post.isCollection = isCollection;
+	}
+	final Concern? isConcern = jsonConvert.convert<Concern>(json['isConcern']);
+	if (isConcern != null) {
+		post.isConcern = isConcern;
+	}
 	return post;
 }
 
@@ -92,8 +126,11 @@ Map<String, dynamic> $PostToJson(Post entity) {
 	data['createDate'] = entity.createDate;
 	data['updateDate'] = entity.updateDate;
 	data['uid'] = entity.uid;
+	data['user'] = entity.user?.toJson();
 	data['tid'] = entity.tid;
+	data['appTopic'] = entity.appTopic?.toJson();
 	data['aid'] = entity.aid;
+	data['appAnimal'] = entity.appAnimal?.toJson();
 	data['location'] = entity.location;
 	data['city'] = entity.city;
 	data['urgent'] = entity.urgent;
@@ -103,5 +140,8 @@ Map<String, dynamic> $PostToJson(Post entity) {
 	data['commentsNumber'] = entity.commentsNumber;
 	data['url'] = entity.url;
 	data['s1'] = entity.s1;
+	data['isLike'] = entity.isLike?.toJson();
+	data['isCollection'] = entity.isCollection?.toJson();
+	data['isConcern'] = entity.isConcern?.toJson();
 	return data;
 }
