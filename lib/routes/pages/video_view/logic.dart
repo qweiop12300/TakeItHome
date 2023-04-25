@@ -12,7 +12,7 @@ class VideoViewLogic extends GetxController {
   final VideoViewState state = VideoViewState();
 
   Future<List<Post>?> getPostList([Map<String,dynamic>? data,int? pageSize,int? pageNum]) async{
-    BaseBean<Post> bean = await Git.getList<Post>(API.post,{"video":"/"});
+    BaseBean<Post> bean = await Git.getList<Post>(API.post,data: {"video":"/"});
     state.postList = bean.rows!;
   }
 

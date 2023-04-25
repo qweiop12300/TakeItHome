@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:take_it_home/common/EventBus.dart';
 
 import '../models/setting/my_setting.dart';
 import 'Git.dart';
@@ -20,6 +21,7 @@ class Global {
 
   static late SharedPreferences _prefs;
   static late Rx<MySetting> profile;
+  static late EventBus eventBus;
   // 网络缓存对象
 
   // 可选的主题列表
@@ -43,7 +45,6 @@ class Global {
     if (_profile != null) {
       try {
         profile = MySetting.fromJson(jsonDecode(_profile)).obs;
-        print("object");
       } catch (e) {
         print(e);
       }
@@ -52,8 +53,11 @@ class Global {
       profile= (MySetting()..theme=0).obs;
       saveProfile();
     }
+    //定义一个top-level（全局）变量，页面引入该文件后可以直接使用bus
+    eventBus = EventBus();
     //初始化网络请求相关配置
     Git.init();
+
   }
 
   // 持久化Profile信息

@@ -1,6 +1,10 @@
 import 'package:take_it_home/generated/json/base/json_field.dart';
 import 'package:take_it_home/generated/json/concern.g.dart';
+import 'package:take_it_home/models/topic.dart';
+import 'package:take_it_home/models/user_e.dart';
 import 'dart:convert';
+
+import 'animal.dart';
 
 @JsonSerializable()
 class Concern {
@@ -11,6 +15,11 @@ class Concern {
 	dynamic toAid;
 	dynamic toTid;
 	String? createDate;
+
+	Animal? appAnimal;
+	UserE? sysUserE;
+	UserE? toUserE;
+	Topic? appTopic;
   
   Concern();
 
@@ -18,14 +27,6 @@ class Concern {
 
   Map<String, dynamic> toJson() => $ConcernToJson(this);
 
-  Concern copyWith({int? id, int? uid, int? toUid, dynamic toAid, dynamic toTid, String? createDate}) {
-      return Concern()..id= id ?? this.id
-			..uid= uid ?? this.uid
-			..toUid= toUid ?? this.toUid
-			..toAid= toAid ?? this.toAid
-			..toTid= toTid ?? this.toTid
-			..createDate= createDate ?? this.createDate;
-  }
     
   @override
   String toString() {

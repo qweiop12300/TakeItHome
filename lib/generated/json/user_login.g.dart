@@ -1,6 +1,9 @@
 import 'package:take_it_home/generated/json/base/json_convert_content.dart';
 import 'package:take_it_home/models/VO/user_login.dart';
 
+import '../../models/sys_user.dart';
+
+
 UserLogin $UserLoginFromJson(Map<String, dynamic> json) {
 	final UserLogin userLogin = UserLogin();
 	final String? username = jsonConvert.convert<String>(json['username']);
@@ -27,6 +30,10 @@ UserLogin $UserLoginFromJson(Map<String, dynamic> json) {
 	if (token != null) {
 		userLogin.token = token;
 	}
+	final SysUser? sysUser = jsonConvert.convert<SysUser>(json['sysUser']);
+	if (sysUser != null) {
+		userLogin.sysUser = sysUser;
+	}
 	return userLogin;
 }
 
@@ -38,5 +45,6 @@ Map<String, dynamic> $UserLoginToJson(UserLogin entity) {
 	data['code'] = entity.code;
 	data['phone'] = entity.phone;
 	data['token'] = entity.token;
+	data['sysUser'] = entity.sysUser?.toJson();
 	return data;
 }

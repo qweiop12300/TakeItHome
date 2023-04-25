@@ -11,6 +11,10 @@ Topic $TopicFromJson(Map<String, dynamic> json) {
 	if (title != null) {
 		topic.title = title;
 	}
+	final String? image = jsonConvert.convert<String>(json['image']);
+	if (image != null) {
+		topic.image = image;
+	}
 	return topic;
 }
 
@@ -18,5 +22,6 @@ Map<String, dynamic> $TopicToJson(Topic entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
 	data['id'] = entity.id;
 	data['title'] = entity.title;
+	data['image'] = entity.image;
 	return data;
 }

@@ -7,6 +7,7 @@ class Topic {
 
 	int? id;
 	String? title;
+  String? image;
   
   Topic();
 
@@ -14,10 +15,6 @@ class Topic {
 
   Map<String, dynamic> toJson() => $TopicToJson(this);
 
-  Topic copyWith({int? id, String? title}) {
-      return Topic()..id= id ?? this.id
-			..title= title ?? this.title;
-  }
     
   @override
   String toString() {

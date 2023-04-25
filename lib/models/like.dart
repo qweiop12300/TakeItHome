@@ -2,6 +2,8 @@ import 'package:take_it_home/generated/json/base/json_field.dart';
 import 'package:take_it_home/generated/json/like.g.dart';
 import 'dart:convert';
 
+import 'package:take_it_home/models/post.dart';
+
 @JsonSerializable()
 class Like {
 
@@ -9,6 +11,8 @@ class Like {
 	int? uid;
 	int? pid;
 	String? createDate;
+
+  Post? appPost;
   
   Like();
 
@@ -16,10 +20,11 @@ class Like {
 
   Map<String, dynamic> toJson() => $LikeToJson(this);
 
-  Like copyWith({int? id, int? uid, int? pid, String? createDate}) {
+  Like copyWith({int? id, int? uid, int? pid, String? createDate,Post? appPost}) {
       return Like()..id= id ?? this.id
 			..uid= uid ?? this.uid
 			..pid= pid ?? this.pid
+        ..appPost= appPost ?? this.appPost
 			..createDate= createDate ?? this.createDate;
   }
     

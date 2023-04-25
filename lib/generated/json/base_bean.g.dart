@@ -27,6 +27,10 @@ BaseBean<T> $BaseBeanFromJson<T>(Map<String, dynamic> json) {
 	if (rows != null) {
 		baseBean.rows = rows;
 	}
+	final String? fileName = jsonConvert.convert<String>(json['fileName']);
+	if (fileName != null) {
+		baseBean.fileName = fileName;
+	}
 	return baseBean;
 }
 
@@ -38,5 +42,6 @@ Map<String, dynamic> $BaseBeanToJson(BaseBean entity) {
 	data['code'] = entity.code;
 	data['data'] = entity.data?.toJson();
 	data['rows'] =  entity.rows?.map((v) => v.toJson()).toList();
+	data['fileName'] = entity.fileName;
 	return data;
 }

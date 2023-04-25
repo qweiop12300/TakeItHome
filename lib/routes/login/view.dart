@@ -22,6 +22,7 @@ class LoginPage extends StatelessWidget {
             TextField(
               controller: logic.username,
               autofocus: true,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   labelText: "手机号",
                   hintText: "手机号或用户名",
@@ -30,6 +31,7 @@ class LoginPage extends StatelessWidget {
             ),
             TextField(
               controller: logic.password,
+              keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                   labelText: "密码",
                   hintText: "您的登录密码",
@@ -57,7 +59,7 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     child: Text("登录"),
                     onPressed: () {
-                      logic.login();
+                      logic.login(context);
                     },
                   )
                 );
@@ -71,6 +73,9 @@ class LoginPage extends StatelessWidget {
           )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: () { Get.toNamed("/register?phone="+logic.username.text)?.then((value) => {logic.username.text=value["username"],logic.password.text=value["password"]});},backgroundColor: Color(0xff376AED),
+        child: Icon(Icons.add,color: Colors.white,),
       ),
     );
   }

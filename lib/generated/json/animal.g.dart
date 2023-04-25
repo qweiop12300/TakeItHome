@@ -1,6 +1,11 @@
 import 'package:take_it_home/generated/json/base/json_convert_content.dart';
 import 'package:take_it_home/models/animal.dart';
 
+import '../../models/animal_state.dart';
+import '../../models/animal_state_data.dart';
+
+
+
 Animal $AnimalFromJson(Map<String, dynamic> json) {
 	final Animal animal = Animal();
 	final int? id = jsonConvert.convert<int>(json['id']);
@@ -11,7 +16,7 @@ Animal $AnimalFromJson(Map<String, dynamic> json) {
 	if (sid != null) {
 		animal.sid = sid;
 	}
-	final dynamic appAnimalStateData = jsonConvert.convert<dynamic>(json['appAnimalStateData']);
+	final AnimalStateData? appAnimalStateData = jsonConvert.convert<AnimalStateData>(json['appAnimalStateData']);
 	if (appAnimalStateData != null) {
 		animal.appAnimalStateData = appAnimalStateData;
 	}
@@ -43,7 +48,7 @@ Animal $AnimalFromJson(Map<String, dynamic> json) {
 	if (s2 != null) {
 		animal.s2 = s2;
 	}
-	final dynamic appAnimalState = jsonConvert.convert<dynamic>(json['appAnimalState']);
+	final AnimalState? appAnimalState = jsonConvert.convert<AnimalState>(json['appAnimalState']);
 	if (appAnimalState != null) {
 		animal.appAnimalState = appAnimalState;
 	}
@@ -54,7 +59,7 @@ Map<String, dynamic> $AnimalToJson(Animal entity) {
 	final Map<String, dynamic> data = <String, dynamic>{};
 	data['id'] = entity.id;
 	data['sid'] = entity.sid;
-	data['appAnimalStateData'] = entity.appAnimalStateData;
+	data['appAnimalStateData'] = entity.appAnimalStateData?.toJson();
 	data['name'] = entity.name;
 	data['sex'] = entity.sex;
 	data['icon'] = entity.icon;
@@ -62,6 +67,6 @@ Map<String, dynamic> $AnimalToJson(Animal entity) {
 	data['year'] = entity.year;
 	data['s1'] = entity.s1;
 	data['s2'] = entity.s2;
-	data['appAnimalState'] = entity.appAnimalState;
+	data['appAnimalState'] = entity.appAnimalState?.toJson();
 	return data;
 }

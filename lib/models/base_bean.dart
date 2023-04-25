@@ -11,6 +11,7 @@ class BaseBean<T>{
 	int? code;
 	T? data;
 	List<T>? rows;
+  String? fileName;
   
   BaseBean();
 
@@ -19,13 +20,14 @@ class BaseBean<T>{
 
   Map<String, dynamic> toJson() => $BaseBeanToJson(this);
 
-  BaseBean copyWith({int? total, String? msg, int? code, T? data, List<T>? rows,String? token}) {
+  BaseBean copyWith({int? total, String? msg, int? code, T? data, List<T>? rows,String? token,String? fileName}) {
       return BaseBean()..total= total ?? this.total
 			..msg= msg ?? this.msg
 			..code= code ?? this.code
 			..data= data ?? this.data
       ..token= token ?? this.token
-			..rows= rows ?? this.rows;
+			..rows= rows ?? this.rows
+      ..fileName= fileName ?? this.fileName;
   }
     
   @override

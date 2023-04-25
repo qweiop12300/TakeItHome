@@ -2,12 +2,15 @@ import 'package:take_it_home/generated/json/base/json_field.dart';
 import 'package:take_it_home/generated/json/animal.g.dart';
 import 'dart:convert';
 
+import 'animal_state.dart';
+import 'animal_state_data.dart';
+
 @JsonSerializable()
 class Animal {
 
 	int? id;
 	dynamic sid;
-	dynamic appAnimalStateData;
+	AnimalStateData? appAnimalStateData;
 	String? name;
 	int? sex;
 	String? icon;
@@ -15,7 +18,7 @@ class Animal {
 	dynamic year;
 	dynamic s1;
 	dynamic s2;
-	dynamic appAnimalState;
+	AnimalState? appAnimalState;
   
   Animal();
 
@@ -23,7 +26,7 @@ class Animal {
 
   Map<String, dynamic> toJson() => $AnimalToJson(this);
 
-  Animal copyWith({int? id, dynamic sid, dynamic appAnimalStateData, String? name, int? sex, String? icon, String? createDate, dynamic year, dynamic s1, dynamic s2, dynamic appAnimalState}) {
+  Animal copyWith({int? id, dynamic sid, AnimalStateData? appAnimalStateData, String? name, int? sex, String? icon, String? createDate, dynamic year, dynamic s1, dynamic s2, AnimalState? appAnimalState}) {
       return Animal()..id= id ?? this.id
 			..sid= sid ?? this.sid
 			..appAnimalStateData= appAnimalStateData ?? this.appAnimalStateData

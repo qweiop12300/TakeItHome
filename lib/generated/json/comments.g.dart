@@ -1,7 +1,9 @@
 import 'package:take_it_home/generated/json/base/json_convert_content.dart';
-import 'package:take_it_home/models/animal.dart';
 import 'package:take_it_home/models/comments.dart';
 import 'package:take_it_home/models/user_e.dart';
+
+import 'package:take_it_home/models/animal.dart';
+
 
 Comments $CommentsFromJson(Map<String, dynamic> json) {
 	final Comments comments = Comments();
@@ -60,9 +62,9 @@ Map<String, dynamic> $CommentsToJson(Comments entity) {
 	data['content'] = entity.content;
 	data['image'] = entity.image;
 	data['uid'] = entity.uid;
-	data['user'] = entity.user;
+	data['user'] = entity.user?.toJson();
 	data['aid'] = entity.aid;
-	data['appAnimal'] = entity.appAnimal;
+	data['appAnimal'] = entity.appAnimal?.toJson();
 	data['likeNumber'] = entity.likeNumber;
 	data['createDate'] = entity.createDate;
 	return data;

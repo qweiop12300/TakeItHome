@@ -1,16 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:take_it_home/common/API.dart';
 import 'package:take_it_home/common/Util.dart';
 import 'package:take_it_home/models/like.dart';
 import 'package:take_it_home/models/post.dart';
+import 'package:take_it_home/widgets/VideoPlayerBean.dart';
 import 'package:take_it_home/widgets/comments.dart';
 import 'package:take_it_home/widgets/loading.dart';
-import 'package:take_it_home/widgets/video.dart';
 import '../../../models/concern.dart';
 import 'logic.dart';
+import 'package:take_it_home/widgets/VideoPlayer.dart'
+if(dart.library.html) 'package:take_it_home/widgets/VideoPlayerAndroid.dart'
+if(dart.library.io) 'package:take_it_home/widgets/VideoPlayerWindows.dart';
 
 class VideoViewPage extends StatefulWidget {
+
+  const VideoViewPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return VideoViewSate();
@@ -23,23 +30,29 @@ class VideoViewSate extends State<VideoViewPage>{
   @override
   void initState() {
     logic.getPostList().then((value) => {
+      state.url = Util.getStartImageUrl(logic.state.postList[0].video),
       setState((){
         state.isLoading=false;
-
-
       })
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return state.isLoading?Loading():PageView.builder(
+    return state.isLoading?Loading():
+    PageView.builder(
         scrollDirection:Axis.vertical,
         pageSnapping:true,
         itemCount: state.postList.length,
+        onPageChanged: (index){
+          // state.url = Util.getStartImageUrl(state.postList[index].video);
+          // setState(() {
+          //
+          // });
+        },
         itemBuilder: (context,index){
-      return ListItem(state.postList[index]);
-    });
+          return ListItem(state.postList[index]);
+        });
   }
 
 }
@@ -48,6 +61,16 @@ class ListItem extends StatelessWidget{
   late Post post;
   ListItem(this.post);
 
+  like(context){
+    context.add(API.like,post.id!).then((value) => {
+      if(value?.code==200){
+        post..isLike=Like()..likeNumber = post.likeNumber!+1
+      }else{
+        post..isLike=null..likeNumber = post.likeNumber!-1
+      },context.update()
+    });
+  }
+
   @override
   Widget build(BuildContext buildContext) {
     return
@@ -55,28 +78,25 @@ class ListItem extends StatelessWidget{
         alignment: Alignment.center,
         children: [
           Container(
-            child:VideoView(Util.getImageUrl(post.video))
+            child:GetBuilder<VideoViewLogic>(builder: (logic){
+              return GestureDetector(
+                child: VideoPlayer(url:Util.getStartImageUrl(post.video))
+              );
+            },)
           ),
           Positioned(
             bottom: 20,
             right: 20,
             width: 50,
-            child:
-            GestureDetector(
-             child: GetBuilder<VideoViewLogic>(builder: (context){
+            child: GetBuilder<VideoViewLogic>(builder: (context){
                return Column(
                  children: [
                    IconButton(onPressed: (){
-                      context.add(API.like,post.id!).then((value) => {
-                        if(value?.code==200){
-                          post..isLike=Like()..likeNumber = post.likeNumber!+1
-                        }else{
-                          post..isLike=null..likeNumber = post.likeNumber!-1
-                        },context.update()
-                      });
-                   }, icon: post.isLike==null?Image.asset("imgs/dianzan.png"):Image.asset("imgs/dianzan_1.png")),
+                      like(context);
+                   }, icon: Icon(size:28,color:Colors.white,post.isLike==null?CupertinoIcons.hand_thumbsup:CupertinoIcons.hand_thumbsup_fill)
+                   ),
                    Text(post.likeNumber!.toString(),style: TextStyle(color: Colors.white,fontSize: 18),),
-                   IconButton(onPressed: (){CommentsView.showBottomView(buildContext);}, icon: Image.asset("imgs/pinglun.png")),
+                   IconButton(onPressed: (){Get.toNamed("/postInfo?id="+post.id!.toString());}, icon: Icon(size:28,color:Colors.white,CupertinoIcons.bubble_middle_bottom)),
                    Text(post.commentsNumber!.toString(),style: TextStyle(color: Colors.white,fontSize: 18),),
                    IconButton(onPressed: (){
                      context.add(API.collection,post.id!).then((value) => {
@@ -86,14 +106,11 @@ class ListItem extends StatelessWidget{
                          post..isCollection=null..collectionNumber = post.collectionNumber!-1
                        },context.update()
                      });
-                   }, icon: post.isCollection==null?Image.asset("imgs/shoucang.png"):Image.asset("imgs/shoucang_1.png")),
+                   }, icon: Icon(size:28,color:Colors.white,post.isCollection==null?CupertinoIcons.bookmark:CupertinoIcons.bookmark_fill)),
                    Text(post.collectionNumber!.toString(),style: TextStyle(color: Colors.white,fontSize: 18),),
                  ],
                );
-             },),
-             onTap: (){
-
-             },
+               },
             )
           ),
           Positioned(
@@ -110,7 +127,7 @@ class ListItem extends StatelessWidget{
                       Container(
                         height:60,
                         width: 60,
-                        child: IconButton(onPressed: (){}, icon: Image.network(Util.getImageUrl(post.user!.avatar!))),
+                        child: IconButton(onPressed: (){}, icon: Image.network(Util.getStartImageUrl(post.user!.avatar!))),
                       ),
                       SizedBox(width: 10,),
                       Text(post.user!.nickName!,style: TextStyle(color: Colors.white),),
